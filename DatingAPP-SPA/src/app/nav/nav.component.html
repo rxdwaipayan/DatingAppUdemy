@@ -1,9 +1,10 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  <div class="container">
   <a class="navbar-brand" href="#">Dating App</a>
   
 
 
-    <ul class="navbar-nav mr-auto">
+    <ul *ngIf="loggedIn()" class="navbar-nav mr-auto">
       <li class="nav-item active">
         <a class="nav-link" href="#">Matches</a>
       </li>
@@ -13,21 +14,19 @@
       <li class="nav-item">
         <a class="nav-link" href="#">Messages</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" (click)="loggedOff()" href="#">logout</a>
-      </li>
+   
      
     </ul>
 
-    <div *ngIf="loggedIn()" class="dropdown">
-      <a class="dropdown-toggle  text text-light" >
-        Welcome User
+    <div *ngIf="loggedIn()" class="dropdown" dropdown>
+      <a class="dropdown-toggle  text text-light" dropdownToggle >
+        Welcome {{username | titlecase}}
       </a>
     
-      <div class="dropdown-menu" >
+      <div class="dropdown-menu mt-3" *dropdownMenu >
         <a class="dropdown-item" href="#"><i class='fa fa-user'></i>Edit Profile</a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">logout</a>
+        <a class="dropdown-item" (click)="loggedOff()"><i class='fa fa-sign-out'></i>logout</a>
       </div>
     </div>
     <form *ngIf="!loggedIn()" #loginform="ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)="login()">
@@ -36,5 +35,5 @@
 
       <button class="btn btn-success my-2 my-sm-0" [disabled]="!loginform.valid" type="submit">Login</button>
     </form>
- 
+  </div>
 </nav>
